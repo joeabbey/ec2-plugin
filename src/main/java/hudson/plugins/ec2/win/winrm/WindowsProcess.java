@@ -132,6 +132,12 @@ public class WindowsProcess {
                             // is killed but the input stream is handed to
                             // another thread
                             // in this case, we can still read from the pipe.
+
+                            // Seems safer to stop if the computer is terminated
+                            if (terminated) {
+                                break;
+                            }
+
                             continue;
                         }
                         if (n == -1)
