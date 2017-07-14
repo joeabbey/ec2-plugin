@@ -135,7 +135,7 @@ public class WindowsProcess {
 
                             // Seems safer to stop if the computer is terminated
                             if (terminated) {
-                                log.log(Level.FINE, "thread terminated: muting exception and leaving");
+                                log.log(Level.FINE, "machine terminated: muting exception and leaving");
                                 break;
                             }
 
