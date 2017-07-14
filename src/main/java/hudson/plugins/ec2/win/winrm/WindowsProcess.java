@@ -135,6 +135,7 @@ public class WindowsProcess {
 
                             // Seems safer to stop if the computer is terminated
                             if (terminated) {
+                                log.log(Level.FINE, "thread terminated: muting exception and leaving");
                                 break;
                             }
 
@@ -142,9 +143,13 @@ public class WindowsProcess {
                         }
                         if (n == -1)
                             break;
-                        if (n == 0)
+                        if (n == 0) {
+                            if (terminated) {
+                                log.log(Level.FINE, "machine terminated: but still read nothing?");
+                                break;
+                            }
                             continue;
-
+                        }
                         byte[] bufToSend = new byte[n];
                         System.arraycopy(buf, 0, bufToSend, 0, n);
                         log.log(Level.FINE, "piping " + bufToSend.length + " to input of " + command);
